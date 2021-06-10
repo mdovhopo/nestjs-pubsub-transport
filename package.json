@@ -43,10 +43,13 @@
       "@commitlint/config-conventional"
     ]
   },
-  "peerDependencies": {
+  "dependencies": {
     "@google-cloud/pubsub": "^2.13.0",
     "@nestjs/common": "^7.6.17",
-    "@nestjs/microservices": "^7.6.17"
+    "@nestjs/microservices": "^7.6.17",
+    "error-to-json": "^2.0.0",
+    "nest-winston": "^1.5.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@commitlint/cli": "11.0.0",
@@ -70,10 +73,5 @@
     "ts-node": "^9.1.1",
     "typedoc": "^0.20.28",
     "typescript": "^4.1.3"
-  },
-  "dependencies": {
-    "error-to-json": "^2.0.0",
-    "nest-winston": "^1.5.0",
-    "winston": "^3.3.3"
   }
 }
