@@ -49,6 +49,7 @@
     "@nestjs/microservices": "^7.6.17",
     "error-to-json": "^2.0.0",
     "nest-winston": "^1.5.0",
+    "reflect-metadata": "^0.1.13",
     "winston": "^3.3.3"
   },
   "devDependencies": {
