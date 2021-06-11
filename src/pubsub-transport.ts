@@ -14,6 +14,7 @@ export type PubSubTransportConfig = {
   maxMessages?: number;
   getPattern?: (msg: Message) => string;
   deserializeMessage?: (msg: Message) => any;
+  ackIfNoHandler?: boolean;
   logger?: Logger;
 };
 
@@ -25,6 +26,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
 
   private readonly getPattern: (msg: Message) => string;
   private readonly deserializeMessage: (msg: Message) => any;
+  private ackIfNoHandler: boolean;
 
   constructor(
     @Inject(PubSubTransportConfig)
@@ -36,6 +38,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
       deserializeMessage,
       getPattern,
       pubsub,
+      ackIfNoHandler,
     }: PubSubTransportConfig,
     @Optional()
     @Inject(WINSTON_MODULE_PROVIDER)
@@ -51,6 +54,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
 
     this.getPattern = getPattern || ((msg) => msg.attributes.operationId);
     this.deserializeMessage = deserializeMessage || ((msg) => JSON.parse(msg.data.toString()));
+    this.ackIfNoHandler = ackIfNoHandler || false;
   }
 
   listen(callback: () => void): void {
@@ -73,6 +77,9 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
     let error: Error | undefined;
 
     if (!handler) {
+      if (this.ackIfNoHandler) {
+        return message.ack();
+      }
       error = new Error(`Handler not found for pattern: ${pattern}`);
     } else {
       const observable = await handler(body);

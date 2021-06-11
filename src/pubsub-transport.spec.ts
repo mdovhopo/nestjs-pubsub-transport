@@ -106,6 +106,24 @@ describe('PubSubTransport', () => {
     expect(logInfoSpy).toBeCalled();
   });
 
+  it('acks message if no handler and ackIfNoHandler enabled', async () => {
+    const transport = new PubSubTransport({ ...config, ackIfNoHandler: true }, logger);
+    const message = new Message({} as any, {
+      ackId: 'ackId',
+      message: {
+        messageId: 'messageId',
+        data: Buffer.from('{ "a": 1 }'),
+        attributes: { operationId: 'operationId' },
+      },
+      deliveryAttempt: 1,
+    });
+    const ackSpy = jest.spyOn(message, 'ack').mockReturnValue();
+
+    await transport.handleMessage(message);
+
+    expect(ackSpy).toBeCalled();
+  });
+
   it('nacks unhandled messages', async () => {
     const message = new Message({} as any, {
       ackId: 'ackId',
