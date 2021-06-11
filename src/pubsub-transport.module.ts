@@ -23,7 +23,7 @@ export class PubsubTransportModule {
    *        ackDeadline: 10, // optional
    *        maxMessages: 10, // optional
    *        getPattern: (msg: Message) => msg.attributes.yourPattern, // optional
-   *        deserializeMessage: (msg: Message) => msg.data,
+   *        deserializeMessage: (msg: Message) => msg.data, // optional
    *     ),
    *     SomeModule,
    *   ],
@@ -43,14 +43,15 @@ export class PubsubTransportModule {
    * @Module({
    *   imports: [
    *     PubsubTransportModule.forRootAsync({
-   *       inject: [],
+   *       inject: [PubSub],
    *       useFactory: () => ({
+   *        pubsub: pubSub,
    *        topic: 'topic-name',
    *        subscription: 'subscription-name',
    *        ackDeadline: 10, // optional
    *        maxMessages: 10, // optional
    *        getPattern: (msg: Message) => msg.attributes.yourPattern, // optional
-   *        deserializeMessage: (msg: Message) => msg.data,
+   *        deserializeMessage: (msg: Message) => msg.data, // optional
    *       }),
    *     ),
    *     SomeModule,

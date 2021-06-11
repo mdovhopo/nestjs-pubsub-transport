@@ -7,8 +7,9 @@ import { Logger } from 'winston';
 
 export const PubSubTransportConfig = Symbol('PubSubTransportConfig');
 export type PubSubTransportConfig = {
-  topic: Topic | string;
-  subscription: Subscription | string;
+  pubsub: PubSub;
+  topic: string;
+  subscription: string;
   ackDeadline?: number;
   maxMessages?: number;
   getPattern?: (msg: Message) => string;
@@ -20,13 +21,12 @@ export type PubSubTransportConfig = {
 export class PubSubTransport extends Server implements CustomTransportStrategy {
   readonly topic: Topic;
   readonly subscription: Subscription;
+  readonly pubSub: PubSub;
 
   private readonly getPattern: (msg: Message) => string;
   private readonly deserializeMessage: (msg: Message) => any;
 
   constructor(
-    // injecting ConfigService but only using properties of PubSubConfig
-    @Inject(PubSub) private pubSub: PubSub,
     @Inject(PubSubTransportConfig)
     {
       topic,
@@ -35,20 +35,19 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
       maxMessages,
       deserializeMessage,
       getPattern,
+      pubsub,
     }: PubSubTransportConfig,
     @Optional()
     @Inject(WINSTON_MODULE_PROVIDER)
     private log?: Logger
   ) {
     super();
-    this.topic = typeof topic === 'string' ? this.pubSub.topic(topic) : topic;
-    this.subscription =
-      typeof subscription === 'string'
-        ? this.topic.subscription(subscription, {
-            ackDeadline: ackDeadline || 10, // in seconds
-            flowControl: { maxMessages: maxMessages || 10 },
-          })
-        : subscription;
+    this.pubSub = pubsub;
+    this.topic = pubsub.topic(topic);
+    this.subscription = this.topic.subscription(subscription, {
+      ackDeadline: ackDeadline || 10, // in seconds
+      flowControl: { maxMessages: maxMessages || 10 },
+    });
 
     this.getPattern = getPattern || ((msg) => msg.attributes.operationId);
     this.deserializeMessage = deserializeMessage || ((msg) => JSON.parse(msg.data.toString()));
