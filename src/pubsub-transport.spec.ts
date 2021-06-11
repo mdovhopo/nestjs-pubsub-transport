@@ -5,10 +5,6 @@ import { createLogger, transports } from 'winston';
 import { PubSubTransport, PubSubTransportConfig } from './pubsub-transport';
 
 describe('PubSubTransport', () => {
-  const config: PubSubTransportConfig = {
-    topic: 'topic',
-    subscription: 'subscription',
-  };
   const logger = createLogger({
     transports: [new transports.Console()],
   });
@@ -31,12 +27,18 @@ describe('PubSubTransport', () => {
   };
   let pubSubService: PubSubTransport;
 
+  const config: PubSubTransportConfig = {
+    topic: 'topic',
+    subscription: 'subscription',
+    pubsub: pubSubMock as unknown as PubSub,
+  };
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   beforeEach(() => {
-    pubSubService = new PubSubTransport(pubSubMock as unknown as PubSub, config, logger);
+    pubSubService = new PubSubTransport(config, logger);
   });
 
   it('creates topic and subscription', async () => {
@@ -99,7 +101,7 @@ describe('PubSubTransport', () => {
     });
     const nackSpy = jest.spyOn(message, 'nack').mockReturnValue();
 
-    pubSubService.handleMessage(message);
+    await pubSubService.handleMessage(message);
 
     expect(nackSpy).toBeCalled();
     expect(logErrorSpy).toBeCalled();
