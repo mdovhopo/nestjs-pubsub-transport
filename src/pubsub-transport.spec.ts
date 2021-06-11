@@ -1,8 +1,10 @@
 import { Message, PubSub } from '@google-cloud/pubsub';
+import { Test } from '@nestjs/testing';
 import { of } from 'rxjs';
 import { createLogger, transports } from 'winston';
 
 import { PubSubTransport, PubSubTransportConfig } from './pubsub-transport';
+import { PubsubTransportModule } from './pubsub-transport.module';
 
 describe('PubSubTransport', () => {
   const logger = createLogger({
@@ -39,6 +41,21 @@ describe('PubSubTransport', () => {
 
   beforeEach(() => {
     pubSubService = new PubSubTransport(config, logger);
+  });
+
+  it('bootstraps module', async () => {
+    await Test.createTestingModule({
+      imports: [
+        PubsubTransportModule.forRootAsync({
+          inject: [],
+          useFactory: () => ({
+            pubsub: config.pubsub,
+            topic: 'topic',
+            subscription: 'sub',
+          }),
+        }),
+      ],
+    }).compile();
   });
 
   it('creates topic and subscription', async () => {
