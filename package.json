@@ -10,8 +10,8 @@
     "nest",
     "nestjs"
   ],
-  "main": "dist/nestjs-pubsub-transport.js",
-  "types": "dist/nestjs-pubsub-transport.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "dist"
   ],
