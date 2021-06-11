@@ -12,9 +12,10 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outDir": "dist",
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "include": [
-    "src"
+    "src",
+    "index.ts"
   ]
 }
