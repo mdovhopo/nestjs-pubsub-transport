@@ -75,6 +75,7 @@ export class PubsubTransportModule {
           useExisting,
           provide: PubSubTransportConfig,
         },
+        PubSubTransport,
       ],
       exports: [PubSubTransport],
     };
