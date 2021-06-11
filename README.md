@@ -72,6 +72,21 @@ export class ClientsController {
 }
 ```
 
+### Connect transport as microservice
+```ts
+  // connect pubsub transport
+  app.connectMicroservice({
+    strategy: app.get(PubSubTransport),
+  });
+```
+
+### Start transport
+
+```ts
+  await app.startAllMicroservicesAsync();
+```
+
+
 Bootstrapped with: [create-ts-lib-gh](https://github.com/glebbash/create-ts-lib-gh)
 
 This project is [Mit Licensed](LICENSE).
