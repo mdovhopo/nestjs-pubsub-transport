@@ -2782,7 +2782,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.module.ts#L34">src/pubsub-transport.module.ts:34</a></li>
+								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.module.ts#L34">src/pubsub-transport.module.ts:34</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2796,7 +2796,7 @@ img {
 <span style="color: #000000">       </span><span style="color: #001080">ackDeadline:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #008000">// optional</span>
 <span style="color: #000000">       </span><span style="color: #001080">maxMessages:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #008000">// optional</span>
 <span style="color: #000000">       </span><span style="color: #795E26">getPattern</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">msg</span><span style="color: #000000">: </span><span style="color: #267F99">Message</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">msg</span><span style="color: #000000">.</span><span style="color: #001080">attributes</span><span style="color: #000000">.</span><span style="color: #001080">yourPattern</span><span style="color: #000000">, </span><span style="color: #008000">// optional</span>
-<span style="color: #000000">       </span><span style="color: #795E26">deserializeMessage</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">msg</span><span style="color: #000000">: </span><span style="color: #267F99">Message</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">msg</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">,</span>
+<span style="color: #000000">       </span><span style="color: #795E26">deserializeMessage</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">msg</span><span style="color: #000000">: </span><span style="color: #267F99">Message</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">msg</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">, </span><span style="color: #008000">// optional</span>
 <span style="color: #000000">    ),</span>
 <span style="color: #000000">    </span><span style="color: #001080">SomeModule</span><span style="color: #000000">,</span>
 <span style="color: #000000">  ],</span>
@@ -2825,7 +2825,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.module.ts#L63">src/pubsub-transport.module.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.module.ts#L64">src/pubsub-transport.module.ts:64</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2834,14 +2834,15 @@ img {
 								<pre><code><span style="color: #000000">@</span><span style="color: #795E26">Module</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">imports:</span><span style="color: #000000"> [</span>
 <span style="color: #000000">    </span><span style="color: #001080">PubsubTransportModule</span><span style="color: #000000">.</span><span style="color: #795E26">forRootAsync</span><span style="color: #000000">({</span>
-<span style="color: #000000">      </span><span style="color: #001080">inject:</span><span style="color: #000000"> [],</span>
+<span style="color: #000000">      </span><span style="color: #001080">inject:</span><span style="color: #000000"> [</span><span style="color: #001080">PubSub</span><span style="color: #000000">],</span>
 <span style="color: #000000">      </span><span style="color: #795E26">useFactory</span><span style="color: #001080">:</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> ({</span>
+<span style="color: #000000">       </span><span style="color: #001080">pubsub:</span><span style="color: #000000"> </span><span style="color: #001080">pubSub</span><span style="color: #000000">,</span>
 <span style="color: #000000">       </span><span style="color: #001080">topic:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;topic-name&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">       </span><span style="color: #001080">subscription:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;subscription-name&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">       </span><span style="color: #001080">ackDeadline:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #008000">// optional</span>
 <span style="color: #000000">       </span><span style="color: #001080">maxMessages:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #008000">// optional</span>
 <span style="color: #000000">       </span><span style="color: #795E26">getPattern</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">msg</span><span style="color: #000000">: </span><span style="color: #267F99">Message</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">msg</span><span style="color: #000000">.</span><span style="color: #001080">attributes</span><span style="color: #000000">.</span><span style="color: #001080">yourPattern</span><span style="color: #000000">, </span><span style="color: #008000">// optional</span>
-<span style="color: #000000">       </span><span style="color: #795E26">deserializeMessage</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">msg</span><span style="color: #000000">: </span><span style="color: #267F99">Message</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">msg</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">,</span>
+<span style="color: #000000">       </span><span style="color: #795E26">deserializeMessage</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">msg</span><span style="color: #000000">: </span><span style="color: #267F99">Message</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">msg</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000">, </span><span style="color: #008000">// optional</span>
 <span style="color: #000000">      }),</span>
 <span style="color: #000000">    ),</span>
 <span style="color: #000000">    </span><span style="color: #001080">SomeModule</span><span style="color: #000000">,</span>

@@ -2725,6 +2725,9 @@ img {
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
 					<a href="pubsub_transport.pubsubtransport.html#messagehandlers" class="tsd-kind-icon">message<wbr>Handlers</a>
 				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="pubsub_transport.pubsubtransport.html#pubsub" class="tsd-kind-icon">pub<wbr>Sub</a>
+				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
 					<a href="pubsub_transport.pubsubtransport.html#serializer" class="tsd-kind-icon">serializer</a>
 				</li>
@@ -2831,6 +2834,7 @@ img {
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="pubsub_transport.pubsubtransport.html#getpattern" class="tsd-kind-icon">get<wbr>Pattern</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="pubsub_transport.pubsubtransport.html#logger" class="tsd-kind-icon">logger</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="pubsub_transport.pubsubtransport.html#messagehandlers" class="tsd-kind-icon">message<wbr>Handlers</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="pubsub_transport.pubsubtransport.html#pubsub" class="tsd-kind-icon">pub<wbr>Sub</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="pubsub_transport.pubsubtransport.html#serializer" class="tsd-kind-icon">serializer</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="pubsub_transport.pubsubtransport.html#subscription" class="tsd-kind-icon">subscription</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="pubsub_transport.pubsubtransport.html#topic" class="tsd-kind-icon">topic</a></li>
@@ -2866,21 +2870,18 @@ img {
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Pub<wbr>Sub<wbr>Transport<span class="tsd-signature-symbol">(</span>pubSub<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PubSub</span>, __namedParameters<span class="tsd-signature-symbol">: </span><a href="../modules/pubsub_transport.html#pubsubtransportconfig-1" class="tsd-signature-type" data-tsd-kind="Variable">PubSubTransportConfig</a>, log<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pubsub_transport.pubsubtransport.html" class="tsd-signature-type" data-tsd-kind="Class">PubSubTransport</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Pub<wbr>Sub<wbr>Transport<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><a href="../modules/pubsub_transport.html#pubsubtransportconfig-1" class="tsd-signature-type" data-tsd-kind="Variable">PubSubTransportConfig</a>, log<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pubsub_transport.pubsubtransport.html" class="tsd-signature-type" data-tsd-kind="Class">PubSubTransport</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Overrides Server.constructor</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L25">src/pubsub-transport.ts:25</a></li>
+								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L27">src/pubsub-transport.ts:27</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
-							<li>
-								<h5>pubSub: <span class="tsd-signature-type">PubSub</span></h5>
-							</li>
 							<li>
 								<h5>__namedParameters: <a href="../modules/pubsub_transport.html#pubsubtransportconfig-1" class="tsd-signature-type" data-tsd-kind="Variable">PubSubTransportConfig</a></h5>
 							</li>
@@ -2901,7 +2902,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">deserialize<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L25">src/pubsub-transport.ts:25</a></li>
+						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L27">src/pubsub-transport.ts:27</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -2943,7 +2944,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">get<wbr>Pattern<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L24">src/pubsub-transport.ts:24</a></li>
+						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L26">src/pubsub-transport.ts:26</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -2990,6 +2991,16 @@ img {
 					</ul>
 				</aside>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="pubsub" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> pub<wbr>Sub</h3>
+				<div class="tsd-signature tsd-kind-icon">pub<wbr>Sub<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PubSub</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L24">src/pubsub-transport.ts:24</a></li>
+					</ul>
+				</aside>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
 				<a name="serializer" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagProtected">Protected</span> serializer</h3>
@@ -3007,7 +3018,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">subscription<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subscription</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L22">src/pubsub-transport.ts:22</a></li>
+						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L23">src/pubsub-transport.ts:23</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3017,7 +3028,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">topic<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Topic</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L21">src/pubsub-transport.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L22">src/pubsub-transport.ts:22</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3065,7 +3076,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of CustomTransportStrategy.close</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L111">src/pubsub-transport.ts:111</a></li>
+								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L110">src/pubsub-transport.ts:110</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -3250,7 +3261,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L68">src/pubsub-transport.ts:68</a></li>
+								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L67">src/pubsub-transport.ts:67</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3322,7 +3333,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of CustomTransportStrategy.listen</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L57">src/pubsub-transport.ts:57</a></li>
+								<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L56">src/pubsub-transport.ts:56</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>

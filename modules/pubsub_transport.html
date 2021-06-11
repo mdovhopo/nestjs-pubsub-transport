@@ -2747,10 +2747,10 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 				<a name="pubsubtransportconfig" class="tsd-anchor"></a>
 				<h3>Pub<wbr>Sub<wbr>Transport<wbr>Config</h3>
-				<div class="tsd-signature tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>ackDeadline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>deserializeMessage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>getPattern<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>logger<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">; </span>maxMessages<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>subscription<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>topic<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Topic</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+				<div class="tsd-signature tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>ackDeadline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>deserializeMessage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>getPattern<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>logger<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">; </span>maxMessages<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>pubsub<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PubSub</span><span class="tsd-signature-symbol">; </span>subscription<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>topic<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L9">src/pubsub-transport.ts:9</a></li>
+						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L9">src/pubsub-transport.ts:9</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -2808,10 +2808,13 @@ img {
 							<h5><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Messages<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5>
 						</li>
 						<li class="tsd-parameter">
-							<h5>subscription<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							<h5>pubsub<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PubSub</span></h5>
 						</li>
 						<li class="tsd-parameter">
-							<h5>topic<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Topic</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							<h5>subscription<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+						</li>
+						<li class="tsd-parameter">
+							<h5>topic<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 						</li>
 					</ul>
 				</div>
@@ -2825,7 +2828,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="pubsub_transport.html#pubsubtransportconfig-1" class="tsd-signature-type" data-tsd-kind="Variable">PubSubTransportConfig</a><span class="tsd-signature-symbol"> = ...</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/df47d11/src/pubsub-transport.ts#L8">src/pubsub-transport.ts:8</a></li>
+						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/a9e1ecf/src/pubsub-transport.ts#L8">src/pubsub-transport.ts:8</a></li>
 					</ul>
 				</aside>
 			</section>
