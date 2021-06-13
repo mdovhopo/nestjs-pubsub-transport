@@ -7,9 +7,9 @@ import { Logger } from 'winston';
 
 export const PubSubTransportConfig = Symbol('PubSubTransportConfig');
 export type PubSubTransportConfig = {
-  pubsub: PubSub;
-  topic: string;
-  subscription: string;
+  pubsub?: PubSub;
+  topic?: string | Topic;
+  subscription: string | Subscription;
   ackDeadline?: number;
   maxMessages?: number;
   getPattern?: (msg: Message) => string;
@@ -20,9 +20,9 @@ export type PubSubTransportConfig = {
 
 @Injectable()
 export class PubSubTransport extends Server implements CustomTransportStrategy {
-  readonly topic: Topic;
+  readonly topic?: Topic;
   readonly subscription: Subscription;
-  readonly pubSub: PubSub;
+  readonly pubSub?: PubSub;
 
   private readonly getPattern: (msg: Message) => string;
   private readonly deserializeMessage: (msg: Message) => any;
@@ -45,12 +45,28 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
     private log?: Logger
   ) {
     super();
-    this.pubSub = pubsub;
-    this.topic = pubsub.topic(topic);
-    this.subscription = this.topic.subscription(subscription, {
-      ackDeadline: ackDeadline || 10, // in seconds
-      flowControl: { maxMessages: maxMessages || 10 },
-    });
+    // kind of ugly logic to no to force user pass pubsub and topic, if they
+    // already have Subscription object
+    if (typeof subscription === 'string') {
+      if (typeof topic === 'string') {
+        if (!pubsub) {
+          throw new TypeError('pubsub is required, if subscription is a string');
+        }
+        this.pubSub = pubsub;
+        this.topic = pubsub.topic(topic);
+      } else {
+        this.topic = topic;
+      }
+      if (!this.topic) {
+        throw new TypeError(`topic is required, if subscription is a string`);
+      }
+      this.subscription = this.topic.subscription(subscription, {
+        ackDeadline: ackDeadline || 10, // in seconds
+        flowControl: { maxMessages: maxMessages || 10 },
+      });
+    } else {
+      this.subscription = subscription;
+    }
 
     this.getPattern = getPattern || ((msg) => msg.attributes.operationId);
     this.deserializeMessage = deserializeMessage || ((msg) => JSON.parse(msg.data.toString()));
@@ -130,7 +146,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
      *    we could keep track of in progress messages and wait in close until all of them are done
      */
     await this.subscription.close();
-    await this.pubSub.close();
+    await this.pubSub?.close();
     // this.log.info('PubSub closed');
   }
 }
