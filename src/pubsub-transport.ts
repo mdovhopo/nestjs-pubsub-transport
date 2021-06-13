@@ -6,17 +6,40 @@ import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 
 export const PubSubTransportConfig = Symbol('PubSubTransportConfig');
-export type PubSubTransportConfig = {
-  pubsub?: PubSub;
-  topic?: string | Topic;
-  subscription: string | Subscription;
-  ackDeadline?: number;
-  maxMessages?: number;
-  getPattern?: (msg: Message) => string;
-  deserializeMessage?: (msg: Message) => any;
-  ackIfNoHandler?: boolean;
-  logger?: Logger;
-};
+export type PubSubTransportConfig =
+  | {
+      pubsub?: undefined;
+      topic?: undefined;
+      subscription: Subscription;
+      ackDeadline?: number;
+      maxMessages?: number;
+      getPattern?: (msg: Message) => string;
+      deserializeMessage?: (msg: Message) => any;
+      ackIfNoHandler?: boolean;
+      logger?: Logger;
+    }
+  | {
+      pubsub?: undefined;
+      topic: Topic;
+      subscription: string;
+      ackDeadline?: number;
+      maxMessages?: number;
+      getPattern?: (msg: Message) => string;
+      deserializeMessage?: (msg: Message) => any;
+      ackIfNoHandler?: boolean;
+      logger?: Logger;
+    }
+  | {
+      pubsub: PubSub;
+      topic: string;
+      subscription: string;
+      ackDeadline?: number;
+      maxMessages?: number;
+      getPattern?: (msg: Message) => string;
+      deserializeMessage?: (msg: Message) => any;
+      ackIfNoHandler?: boolean;
+      logger?: Logger;
+    };
 
 @Injectable()
 export class PubSubTransport extends Server implements CustomTransportStrategy {
