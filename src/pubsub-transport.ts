@@ -122,6 +122,11 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
       error = new Error(`Handler not found for pattern: ${pattern}`);
     } else {
       const observable = await handler(body);
+      if (!observable) {
+        console.warn(
+          `Your handler did not return Observable, maybe you forgot to use PubSubInterceptor for your controller?`
+        );
+      }
       error = await observable.toPromise();
     }
 
