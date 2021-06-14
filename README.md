@@ -59,7 +59,10 @@ export class AppModule {
 ```ts
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { PubSubInterceptor } from 'nestjs-pubsub-transport';
 
+// Use interceptor, to correctly catch errors, otherwise transport will always 'ack' message
+@UseInterceptors(PubSubInterceptor)
 @Controller()
 export class ClientsController {
   constructor() {
@@ -73,11 +76,12 @@ export class ClientsController {
 ```
 
 ### Connect transport as microservice
+
 ```ts
   // connect pubsub transport
-  app.connectMicroservice({
-    strategy: app.get(PubSubTransport),
-  });
+app.connectMicroservice({
+  strategy: app.get(PubSubTransport),
+});
 ```
 
 ### Start transport
@@ -85,7 +89,6 @@ export class ClientsController {
 ```ts
   await app.startAllMicroservicesAsync();
 ```
-
 
 Bootstrapped with: [create-ts-lib-gh](https://github.com/glebbash/create-ts-lib-gh)
 
