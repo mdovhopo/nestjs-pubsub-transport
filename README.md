@@ -68,6 +68,8 @@ export class ClientsController {
   constructor() {
   }
 
+  // Make sure that your methods in controllers does not return anything, it might break
+  // error handling logic
   @MessagePattern('pattern')
   authorize(@Payload() data: AuthorizeClientMessage) {
     console.log('handle message', data);
