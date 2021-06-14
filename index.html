@@ -2764,7 +2764,10 @@ img {
 			</a>
 			<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Controller</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@nestjs/common&#039;</span><span style="color: #000000">;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">MessagePattern</span><span style="color: #000000">, </span><span style="color: #001080">Payload</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@nestjs/microservices&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">PubSubInterceptor</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;nestjs-pubsub-transport&#039;</span><span style="color: #000000">;</span>
 
+<span style="color: #008000">// Use interceptor, to correctly catch errors, otherwise transport will always &#039;ack&#039; message</span>
+<span style="color: #000000">@</span><span style="color: #795E26">UseInterceptors</span><span style="color: #000000">(</span><span style="color: #001080">PubSubInterceptor</span><span style="color: #000000">)</span>
 <span style="color: #000000">@</span><span style="color: #795E26">Controller</span><span style="color: #000000">()</span>
 <span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">ClientsController</span><span style="color: #000000"> {</span>
 <span style="color: #000000">  </span><span style="color: #0000FF">constructor</span><span style="color: #000000">() {</span>
@@ -2780,9 +2783,9 @@ img {
 				<h3>Connect transport as microservice</h3>
 			</a>
 			<pre><code class="language-ts"><span style="color: #000000">  </span><span style="color: #008000">// connect pubsub transport</span>
-<span style="color: #000000">  </span><span style="color: #001080">app</span><span style="color: #000000">.</span><span style="color: #795E26">connectMicroservice</span><span style="color: #000000">({</span>
-<span style="color: #000000">    </span><span style="color: #001080">strategy:</span><span style="color: #000000"> </span><span style="color: #001080">app</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #001080">PubSubTransport</span><span style="color: #000000">),</span>
-<span style="color: #000000">  });</span>
+<span style="color: #001080">app</span><span style="color: #000000">.</span><span style="color: #795E26">connectMicroservice</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">strategy:</span><span style="color: #000000"> </span><span style="color: #001080">app</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #001080">PubSubTransport</span><span style="color: #000000">),</span>
+<span style="color: #000000">});</span>
 </code></pre>
 			<a href="#start-transport" id="start-transport" style="color: inherit; text-decoration: none;">
 				<h3>Start transport</h3>
@@ -2803,6 +2806,8 @@ img {
 							<li class="tsd-kind-module"><a href="modules/pubsub_transport.html" class="tsd-kind-icon">pubsub-<wbr>transport</a></li>
 							<li class="tsd-kind-module"><a href="modules/pubsub_transport_module.html" class="tsd-kind-icon">pubsub-<wbr>transport.module</a></li>
 							<li class="tsd-kind-module"><a href="modules/pubsub_transport_spec.html" class="tsd-kind-icon">pubsub-<wbr>transport.spec</a></li>
+							<li class="tsd-kind-module"><a href="modules/pubsub_interceptor.html" class="tsd-kind-icon">pubsub.interceptor</a></li>
+							<li class="tsd-kind-module"><a href="modules/pubsub_interceptor_spec.html" class="tsd-kind-icon">pubsub.interceptor.spec</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2814,6 +2819,7 @@ img {
 				<div class="tsd-legend-group">
 					<ul class="tsd-legend">
 						<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+						<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 						<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 					</ul>
 					<ul class="tsd-legend">

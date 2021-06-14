@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>pubsub-transport | nestjs-pubsub-transport</title>
+	<title>pubsub.interceptor.spec | nestjs-pubsub-transport</title>
 	<meta name="description" content="Documentation for nestjs-pubsub-transport">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
@@ -2704,70 +2704,10 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class=" tsd-kind-class tsd-parent-kind-module">
-			<a href="../classes/pubsub_transport.pubsubtransport.html" class="tsd-kind-icon">Pub<wbr>Sub<wbr>Transport</a>
-		</li>
-		<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-			<a href="pubsub_transport.html#pubsubtransportconfig" class="tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config</a>
-		</li>
-		<li class=" tsd-kind-variable tsd-parent-kind-module">
-			<a href="pubsub_transport.html#pubsubtransportconfig-1" class="tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config</a>
-		</li>
 	</ul>
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
-		<section class="tsd-panel-group tsd-index-group">
-			<h2>Index</h2>
-			<section class="tsd-panel tsd-index-panel">
-				<div class="tsd-index-content">
-					<section class="tsd-index-section ">
-						<h3>Classes</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/pubsub_transport.pubsubtransport.html" class="tsd-kind-icon">Pub<wbr>Sub<wbr>Transport</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section ">
-						<h3>Type aliases</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="pubsub_transport.html#pubsubtransportconfig" class="tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section ">
-						<h3>Variables</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-variable tsd-parent-kind-module"><a href="pubsub_transport.html#pubsubtransportconfig-1" class="tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config</a></li>
-						</ul>
-					</section>
-				</div>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Type aliases</h2>
-			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-				<a name="pubsubtransportconfig" class="tsd-anchor"></a>
-				<h3>Pub<wbr>Sub<wbr>Transport<wbr>Config</h3>
-				<div class="tsd-signature tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>ackDeadline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>ackIfNoHandler<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>deserializeMessage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>getPattern<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>logger<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">; </span>maxMessages<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>pubsub<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">; </span>subscription<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol">; </span>topic<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>ackDeadline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>ackIfNoHandler<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>deserializeMessage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>getPattern<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>logger<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">; </span>maxMessages<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>pubsub<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">; </span>subscription<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>topic<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Topic</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>ackDeadline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>ackIfNoHandler<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>deserializeMessage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>getPattern<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>msg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>logger<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Logger</span><span class="tsd-signature-symbol">; </span>maxMessages<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>pubsub<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PubSub</span><span class="tsd-signature-symbol">; </span>subscription<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>topic<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/0593882/src/pubsub-transport.ts#L9">src/pubsub-transport.ts:9</a></li>
-					</ul>
-				</aside>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Variables</h2>
-			<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-				<a name="pubsubtransportconfig-1" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> Pub<wbr>Sub<wbr>Transport<wbr>Config</h3>
-				<div class="tsd-signature tsd-kind-icon">Pub<wbr>Sub<wbr>Transport<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><a href="pubsub_transport.html#pubsubtransportconfig-1" class="tsd-signature-type" data-tsd-kind="Variable">PubSubTransportConfig</a><span class="tsd-signature-symbol"> = ...</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/mdovhopo/nestjs-pubsub-transport/blob/0593882/src/pubsub-transport.ts#L8">src/pubsub-transport.ts:8</a></li>
-					</ul>
-				</aside>
-			</section>
-		</section>
 		<footer class="with-border-bottom">
 			<div class="container">
 				<h2>Legend</h2>
