@@ -2773,6 +2773,8 @@ img {
 <span style="color: #000000">  </span><span style="color: #0000FF">constructor</span><span style="color: #000000">() {</span>
 <span style="color: #000000">  }</span>
 
+<span style="color: #000000">  </span><span style="color: #008000">// Make sure that your methods in controllers does not return anything, it might break</span>
+<span style="color: #000000">  </span><span style="color: #008000">// error handling logic</span>
 <span style="color: #000000">  @</span><span style="color: #795E26">MessagePattern</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;pattern&#039;</span><span style="color: #000000">)</span>
 <span style="color: #000000">  </span><span style="color: #795E26">authorize</span><span style="color: #000000">(@</span><span style="color: #795E26">Payload</span><span style="color: #000000">() </span><span style="color: #001080">data</span><span style="color: #000000">: </span><span style="color: #267F99">AuthorizeClientMessage</span><span style="color: #000000">) {</span>
 <span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;handle message&#039;</span><span style="color: #000000">, </span><span style="color: #001080">data</span><span style="color: #000000">);</span>
