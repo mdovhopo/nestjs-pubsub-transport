@@ -3,6 +3,7 @@ import { Inject, Injectable, Optional } from '@nestjs/common';
 import { CustomTransportStrategy, Server } from '@nestjs/microservices';
 import errorToJSON from 'error-to-json';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { firstValueFrom } from 'rxjs';
 import { Logger } from 'winston';
 
 export const PubSubTransportConfig = Symbol('PubSubTransportConfig');
@@ -122,12 +123,13 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
       error = new Error(`Handler not found for pattern: ${pattern}`);
     } else {
       const observable = await handler(body);
-      if (!observable) {
-        console.warn(
+      if (observable) {
+        error = await firstValueFrom(observable);
+      } else {
+        this.log?.warn(
           `Your handler did not return Observable, maybe you forgot to use PubSubInterceptor for your controller?`
         );
       }
-      error = await observable.toPromise();
     }
 
     if (!error) {

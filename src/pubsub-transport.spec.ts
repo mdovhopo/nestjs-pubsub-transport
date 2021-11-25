@@ -1,10 +1,8 @@
 import { Message, PubSub } from '@google-cloud/pubsub';
-import { Test } from '@nestjs/testing';
 import { of } from 'rxjs';
 import { createLogger, transports } from 'winston';
 
 import { PubSubTransport, PubSubTransportConfig } from './pubsub-transport';
-import { PubsubTransportModule } from './pubsub-transport.module';
 
 describe('PubSubTransport', () => {
   const logger = createLogger({
@@ -12,6 +10,7 @@ describe('PubSubTransport', () => {
   });
 
   const logInfoSpy = jest.spyOn(logger, 'info').mockReturnThis();
+  const logWarnSpy = jest.spyOn(logger, 'warn').mockReturnThis();
   const logErrorSpy = jest.spyOn(logger, 'error').mockReturnThis();
 
   const subscriptionMock = {
@@ -41,21 +40,6 @@ describe('PubSubTransport', () => {
 
   beforeEach(() => {
     pubSubService = new PubSubTransport(config, logger);
-  });
-
-  it('bootstraps module', async () => {
-    await Test.createTestingModule({
-      imports: [
-        PubsubTransportModule.forRootAsync({
-          inject: [],
-          useFactory: () => ({
-            pubsub: config.pubsub,
-            topic: 'topic',
-            subscription: 'sub',
-          }),
-        }),
-      ],
-    }).compile();
   });
 
   it('creates topic and subscription', async () => {
@@ -102,6 +86,32 @@ describe('PubSubTransport', () => {
     await pubSubService.handleMessage(message);
 
     expect(handler).toBeCalled();
+    expect(ackSpy).toBeCalled();
+    expect(logInfoSpy).toBeCalled();
+  });
+
+  it('handles incoming messages', async () => {
+    const message = new Message({} as any, {
+      ackId: 'ackId',
+      message: {
+        messageId: 'messageId',
+        data: Buffer.from('{ "a": 1 }'),
+        attributes: { operationId: 'operationId' },
+      },
+      deliveryAttempt: 1,
+    });
+    const ackSpy = jest.spyOn(message, 'ack').mockReturnValue();
+
+    const handler = jest.fn().mockResolvedValue(undefined);
+
+    pubSubService.addHandler('operationId', handler);
+
+    await pubSubService.handleMessage(message);
+
+    expect(handler).toBeCalled();
+    expect(logWarnSpy).toBeCalledWith(
+      'Your handler did not return Observable, maybe you forgot to use PubSubInterceptor for your controller?'
+    );
     expect(ackSpy).toBeCalled();
     expect(logInfoSpy).toBeCalled();
   });
