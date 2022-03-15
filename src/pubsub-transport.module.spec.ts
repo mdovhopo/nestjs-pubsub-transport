@@ -41,6 +41,36 @@ describe('PubsubTransportModule', () => {
     expect(app.get(PubSubTransport)).toBeDefined();
   });
 
+  it('bootstraps two modules using symbol token (async)', async () => {
+    const serviceA = Symbol('ServiceA');
+    const serviceB = Symbol('ServiceB');
+    const app = await Test.createTestingModule({
+      imports: [
+        PubsubTransportModule.forRootAsync({
+          inject: [],
+          useFactory: () => ({
+            pubsub: config.pubsub,
+            topic: 'topic',
+            subscription: 'sub',
+          }),
+          token: serviceA,
+        }),
+        PubsubTransportModule.forRootAsync({
+          inject: [],
+          useFactory: () => ({
+            pubsub: config.pubsub,
+            topic: 'topic',
+            subscription: 'sub',
+          }),
+          token: serviceB,
+        }),
+      ],
+    }).compile();
+
+    expect(app.get(serviceA)).toBeDefined();
+    expect(app.get(serviceB)).toBeDefined();
+  });
+
   it('bootstraps module (sync)', async () => {
     const app = await Test.createTestingModule({
       imports: [

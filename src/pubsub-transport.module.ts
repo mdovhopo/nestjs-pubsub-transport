@@ -7,6 +7,7 @@ export interface PubSubTransportAsyncOptions extends Pick<ModuleMetadata, 'impor
   useClass?: Type<PubSubTransportConfig>;
   useFactory?: (...args: any[]) => Promise<PubSubTransportConfig> | PubSubTransportConfig;
   inject?: any[];
+  token?: symbol;
 }
 
 @Module({})
@@ -61,7 +62,7 @@ export class PubsubTransportModule {
    */
 
   static forRootAsync(options: PubSubTransportAsyncOptions): DynamicModule {
-    const { imports = [], useClass, useFactory, useExisting, inject } = options;
+    const { imports = [], useClass, useFactory, useExisting, inject, token } = options;
     return {
       module: PubsubTransportModule,
       global: true,
@@ -74,9 +75,9 @@ export class PubsubTransportModule {
           useExisting,
           provide: PubSubTransportConfig,
         },
-        PubSubTransport,
+        token ? { useClass: PubSubTransport, provide: token } : PubSubTransport,
       ],
-      exports: [PubSubTransport],
+      exports: [token || PubSubTransport],
     };
   }
 }
