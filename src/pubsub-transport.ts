@@ -86,7 +86,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
       }
       this.subscription = this.topic.subscription(subscription, {
         ackDeadline: ackDeadline || 10, // in seconds
-        flowControl: { maxMessages: maxMessages || 10 },
+        flowControl: { maxMessages: maxMessages || 1000 },
       });
     } else {
       this.subscription = subscription;
