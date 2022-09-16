@@ -1,7 +1,5 @@
 import type { PubSub } from '@google-cloud/pubsub';
-import { Type } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { WinstonLogger } from 'nest-winston';
 
 import { PubSubTransport, PubSubTransportConfig, PubsubTransportModule } from '..';
 
@@ -44,19 +42,16 @@ describe('PubsubTransportModule', () => {
   });
 
   it('bootstraps module with a custom logger', async () => {
+    const loggerToken = Symbol('MockLogger');
     const mockLogger = {
       log: () => ({}),
     };
-    const MockLoggerCtr = class {
-      constructor() {
-        return mockLogger;
-      }
-    } as never as Type<WinstonLogger>;
 
     const app = await Test.createTestingModule({
       imports: [
         PubsubTransportModule.forRootAsync({
-          logger: MockLoggerCtr,
+          logger: loggerToken,
+          providers: [{ provide: loggerToken, useValue: mockLogger }],
           useFactory: () => ({
             pubsub: config.pubsub,
             topic: 'topic',
