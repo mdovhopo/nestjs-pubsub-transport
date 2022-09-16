@@ -2,10 +2,10 @@ import { Message, PubSub, Subscription, Topic } from '@google-cloud/pubsub';
 import { Inject, Injectable, Optional } from '@nestjs/common';
 import { CustomTransportStrategy, Server } from '@nestjs/microservices';
 import errorToJSON from 'error-to-json';
-import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { firstValueFrom } from 'rxjs';
 import { Logger } from 'winston';
 
+export const LoggerToken = Symbol('Logger');
 export const PubSubTransportConfig = Symbol('PubSubTransportConfig');
 export type PubSubTransportConfig =
   | {
@@ -17,7 +17,6 @@ export type PubSubTransportConfig =
       getPattern?: (msg: Message) => string;
       deserializeMessage?: (msg: Message) => any;
       ackIfNoHandler?: boolean;
-      logger?: Logger;
     }
   | {
       pubsub?: undefined;
@@ -28,7 +27,6 @@ export type PubSubTransportConfig =
       getPattern?: (msg: Message) => string;
       deserializeMessage?: (msg: Message) => any;
       ackIfNoHandler?: boolean;
-      logger?: Logger;
     }
   | {
       pubsub: PubSub;
@@ -39,7 +37,6 @@ export type PubSubTransportConfig =
       getPattern?: (msg: Message) => string;
       deserializeMessage?: (msg: Message) => any;
       ackIfNoHandler?: boolean;
-      logger?: Logger;
     };
 
 @Injectable()
@@ -65,7 +62,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
       ackIfNoHandler,
     }: PubSubTransportConfig,
     @Optional()
-    @Inject(WINSTON_MODULE_PROVIDER)
+    @Inject(LoggerToken)
     private log?: Logger
   ) {
     super();
