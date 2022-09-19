@@ -5,6 +5,13 @@ import errorToJSON from 'error-to-json';
 import { firstValueFrom } from 'rxjs';
 import { Logger } from 'winston';
 
+export interface PubSubContext {
+  id: string;
+
+  deliveryAttempt: number;
+
+  pattern: string;
+}
 export const LoggerToken = Symbol('Logger');
 export const PubSubTransportConfig = Symbol('PubSubTransportConfig');
 export type PubSubTransportConfig =
@@ -108,6 +115,11 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
   async handleMessage(message: Message): Promise<void> {
     const pattern = this.getPattern(message);
     const body = this.deserializeMessage(message);
+    const context: PubSubContext = {
+      id: message.id,
+      deliveryAttempt: message.deliveryAttempt,
+      pattern,
+    };
 
     const handler = this.getHandlerByPattern(pattern);
 
@@ -119,7 +131,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
       }
       error = new Error(`Handler not found for pattern: ${pattern}`);
     } else {
-      const observable = await handler(body);
+      const observable = await handler(body, context);
       if (observable) {
         error = await firstValueFrom(observable);
       } else {

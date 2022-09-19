@@ -86,6 +86,12 @@ describe('PubSubTransport', () => {
     await pubSubService.handleMessage(message);
 
     expect(handler).toBeCalled();
+    expect(handler).toBeCalledWith(
+      {
+        a: 1,
+      },
+      { deliveryAttempt: 1, id: 'messageId', pattern: 'operationId' }
+    );
     expect(ackSpy).toBeCalled();
     expect(logInfoSpy).toBeCalled();
   });
