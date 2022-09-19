@@ -3,7 +3,8 @@ import { Inject, Injectable, Optional } from '@nestjs/common';
 import { CustomTransportStrategy, Server } from '@nestjs/microservices';
 import errorToJSON from 'error-to-json';
 import { firstValueFrom } from 'rxjs';
-import { Logger } from 'winston';
+
+import { PubSubTransportLogger } from './pubsub-transport.module';
 
 export const LoggerToken = Symbol('Logger');
 export const PubSubTransportConfig = Symbol('PubSubTransportConfig');
@@ -63,7 +64,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
     }: PubSubTransportConfig,
     @Optional()
     @Inject(LoggerToken)
-    private log?: Logger
+    private log?: PubSubTransportLogger
   ) {
     super();
     // kind of ugly logic to no to force user pass pubsub and topic, if they
@@ -98,7 +99,6 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
     this.log?.debug('Listening for PubSub messages...');
     this.subscription.on('close', () => {
       this.log?.error('PubSub subscription closed unexpectedly');
-      this.log?.close();
       process.exit(3);
     });
     this.subscription.on('message', (msg: Message) => this.handleMessage(msg));

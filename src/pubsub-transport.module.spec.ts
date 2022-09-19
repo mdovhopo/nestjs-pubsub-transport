@@ -2,6 +2,7 @@ import type { PubSub } from '@google-cloud/pubsub';
 import { Test } from '@nestjs/testing';
 
 import { PubSubTransport, PubSubTransportConfig, PubsubTransportModule } from '..';
+import { defaultLogger, PubSubTransportLogger } from './pubsub-transport.module';
 
 describe('PubsubTransportModule', () => {
   const subscriptionMock = {
@@ -42,16 +43,29 @@ describe('PubsubTransportModule', () => {
   });
 
   it('bootstraps module with a custom logger', async () => {
-    const loggerToken = Symbol('MockLogger');
-    const mockLogger = {
-      log: () => ({}),
+    const MockLogger = class MockLogger implements PubSubTransportLogger {
+      debug(): void {
+        return;
+      }
+
+      error(): void {
+        return;
+      }
+
+      info(): void {
+        return;
+      }
+
+      warn(): void {
+        return;
+      }
     };
 
     const app = await Test.createTestingModule({
       imports: [
         PubsubTransportModule.forRootAsync({
-          logger: loggerToken,
-          providers: [{ provide: loggerToken, useValue: mockLogger }],
+          logger: MockLogger,
+          providers: [{ provide: MockLogger, useClass: MockLogger }],
           useFactory: () => ({
             pubsub: config.pubsub,
             topic: 'topic',
@@ -63,7 +77,26 @@ describe('PubsubTransportModule', () => {
 
     const transport = app.get(PubSubTransport);
     expect(transport).toBeDefined();
-    expect((transport as never as Record<string, unknown>)['log']).toBe(mockLogger);
+    expect((transport as never as Record<string, unknown>)['log']).toBeInstanceOf(MockLogger);
+  });
+
+  it('bootstraps module with a default logger', async () => {
+    const app = await Test.createTestingModule({
+      imports: [
+        PubsubTransportModule.forRootAsync({
+          logger: true,
+          useFactory: () => ({
+            pubsub: config.pubsub,
+            topic: 'topic',
+            subscription: 'sub',
+          }),
+        }),
+      ],
+    }).compile();
+
+    const transport = app.get(PubSubTransport);
+    expect(transport).toBeDefined();
+    expect((transport as never as Record<string, unknown>)['log']).toBe(defaultLogger);
   });
 
   it('bootstraps two modules using symbol token (async)', async () => {

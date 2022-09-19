@@ -1,7 +1,20 @@
-import { DynamicModule, Module, ModuleMetadata, Type } from '@nestjs/common';
-import { WinstonLogger } from 'nest-winston';
+import { DynamicModule, Logger, Module, ModuleMetadata, Provider, Type } from '@nestjs/common';
 
 import { LoggerToken, PubSubTransport, PubSubTransportConfig } from './pubsub-transport';
+
+export interface PubSubTransportLogger {
+  debug: (...args: unknown[]) => void;
+  error: (...args: unknown[]) => void;
+  warn: (...args: unknown[]) => void;
+  info: (...args: unknown[]) => void;
+}
+
+export const defaultLogger: PubSubTransportLogger = {
+  debug: Logger.debug,
+  info: Logger.log,
+  error: Logger.error,
+  warn: Logger.warn,
+};
 
 export interface PubSubTransportAsyncOptions extends Pick<ModuleMetadata, 'imports' | 'providers'> {
   useExisting?: Type<PubSubTransportConfig>;
@@ -9,7 +22,7 @@ export interface PubSubTransportAsyncOptions extends Pick<ModuleMetadata, 'impor
   useFactory?: (...args: any[]) => Promise<PubSubTransportConfig> | PubSubTransportConfig;
   inject?: any[];
   token?: symbol;
-  logger?: Type<WinstonLogger> | symbol;
+  logger?: boolean | Type<PubSubTransportLogger>;
 }
 
 @Module({})
@@ -74,6 +87,7 @@ export class PubsubTransportModule {
       providers,
       logger,
     } = options;
+
     return {
       module: PubsubTransportModule,
       global: true,
@@ -87,7 +101,7 @@ export class PubsubTransportModule {
           useExisting,
           provide: PubSubTransportConfig,
         },
-        { provide: LoggerToken, useExisting: logger || WinstonLogger },
+        ...getLoggerProviderDefinition(logger),
         token
           ? {
               useClass: PubSubTransport,
@@ -98,4 +112,18 @@ export class PubsubTransportModule {
       exports: [token || PubSubTransport],
     };
   }
+}
+
+function getLoggerProviderDefinition(
+  logger?: boolean | Type<PubSubTransportLogger>
+): [Provider] | [] {
+  if (logger === false || logger === undefined) {
+    return [];
+  }
+
+  if (logger === true) {
+    return [{ provide: LoggerToken, useValue: defaultLogger }];
+  }
+
+  return [{ provide: LoggerToken, useExisting: logger }];
 }
