@@ -1,7 +1,6 @@
 import { DynamicModule, Module, ModuleMetadata, Type } from '@nestjs/common';
-import { WinstonLogger } from 'nest-winston';
 
-import { LoggerToken, PubSubTransport, PubSubTransportConfig } from './pubsub-transport';
+import { PubSubTransport, PubSubTransportConfig } from './pubsub-transport';
 
 export interface PubSubTransportAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
   useExisting?: Type<PubSubTransportConfig>;
@@ -9,7 +8,6 @@ export interface PubSubTransportAsyncOptions extends Pick<ModuleMetadata, 'impor
   useFactory?: (...args: any[]) => Promise<PubSubTransportConfig> | PubSubTransportConfig;
   inject?: any[];
   token?: symbol;
-  logger?: Type<WinstonLogger>;
 }
 
 @Module({})
@@ -64,7 +62,7 @@ export class PubsubTransportModule {
    */
 
   static forRootAsync(options: PubSubTransportAsyncOptions): DynamicModule {
-    const { imports = [], useClass, useFactory, useExisting, inject, token, logger } = options;
+    const { imports = [], useClass, useFactory, useExisting, inject, token } = options;
     return {
       module: PubsubTransportModule,
       global: true,
@@ -77,7 +75,6 @@ export class PubsubTransportModule {
           useExisting,
           provide: PubSubTransportConfig,
         },
-        { provide: LoggerToken, useClass: logger || WinstonLogger },
         token ? { useClass: PubSubTransport, provide: token } : PubSubTransport,
       ],
       exports: [token || PubSubTransport],
