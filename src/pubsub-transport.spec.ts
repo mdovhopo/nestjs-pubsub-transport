@@ -101,7 +101,7 @@ describe('PubSubTransport', () => {
     expect(logInfoSpy).toBeCalled();
   });
 
-  it('handles incoming messages if', async () => {
+  it('handles incoming messages if handler does not return Observable', async () => {
     const message = new Message({} as any, {
       ackId: 'ackId',
       message: {
