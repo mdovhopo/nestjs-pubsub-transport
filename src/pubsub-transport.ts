@@ -12,6 +12,8 @@ export interface PubSubContext {
   deliveryAttempt: number;
 
   pattern: string;
+
+  attributes: Record<string, string>;
 }
 export const PubSubTransportConfig = Symbol('PubSubTransportConfig');
 export type PubSubTransportConfig =
@@ -122,6 +124,7 @@ export class PubSubTransport extends Server implements CustomTransportStrategy {
       id: message.id,
       deliveryAttempt: message.deliveryAttempt,
       pattern,
+      attributes: message.attributes,
     };
 
     const handler = this.getHandlerByPattern(pattern);

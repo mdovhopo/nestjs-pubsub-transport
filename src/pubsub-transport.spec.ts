@@ -90,13 +90,18 @@ describe('PubSubTransport', () => {
       {
         a: 1,
       },
-      { deliveryAttempt: 1, id: 'messageId', pattern: 'operationId' }
+      {
+        deliveryAttempt: 1,
+        id: 'messageId',
+        pattern: 'operationId',
+        attributes: { operationId: 'operationId' },
+      }
     );
     expect(ackSpy).toBeCalled();
     expect(logInfoSpy).toBeCalled();
   });
 
-  it('handles incoming messages', async () => {
+  it('handles incoming messages if handler does not return Observable', async () => {
     const message = new Message({} as any, {
       ackId: 'ackId',
       message: {
